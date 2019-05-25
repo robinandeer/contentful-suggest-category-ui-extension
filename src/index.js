@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { TextInput } from '@contentful/forma-36-react-components';
+import { TextInput, Button } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
 import './index.css';
@@ -17,6 +17,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       value: props.sdk.field.getValue(),
+      loading: false,
     };
   }
 
@@ -39,25 +40,21 @@ class App extends React.Component {
     this.setState({ value });
   };
 
-  onChange = e => {
-    const value = e.currentTarget.value;
-    this.setState({ value });
-    if (value) {
-      this.props.sdk.field.setValue(value);
-    } else {
-      this.props.sdk.field.removeValue();
-    }
-  };
+  handleClickSuggest = () => {};
 
   render() {
     return (
-      <TextInput
-        width="large"
-        type="text"
-        id="my-field"
-        value={this.state.value}
-        onChange={this.onChange}
-      />
+      <>
+        <TextInput
+          width="full"
+          type="text"
+          value={this.state.value}
+          disabled={true}
+        />
+        <Button loading={this.state.loading} onClick={this.handleClickSuggest}>
+          Suggest
+        </Button>
+      </>
     );
   }
 }
