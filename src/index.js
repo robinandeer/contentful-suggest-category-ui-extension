@@ -11,12 +11,13 @@ class App extends React.Component {
     sdk: PropTypes.object.isRequired,
   };
 
-  detachExternalChangeHandler = null;
+  detachExternalChangeHandlerMethods = [];
 
   constructor(props) {
     super(props);
     this.state = {
       value: props.sdk.field.getValue(),
+      description: props.sdk.entry.fields.description.getValue(),
       loading: false,
     };
   }
@@ -25,20 +26,19 @@ class App extends React.Component {
     this.props.sdk.window.startAutoResizer();
 
     // Handler for external field value changes (e.g. when multiple authors are working on the same entry).
-    this.detachExternalChangeHandler = this.props.sdk.field.onValueChanged(
-      this.onExternalChange
+    this.detachExternalChangeHandlerMethods.push(
+      this.props.sdk.field.onValueChanged(value => this.setState({ value }))
+    );
+    this.detachExternalChangeHandlerMethods.push(
+      this.props.sdk.entry.fields.description.onValueChanged(
+        description => this.setState({ description })
+      )
     );
   }
 
   componentWillUnmount() {
-    if (this.detachExternalChangeHandler) {
-      this.detachExternalChangeHandler();
-    }
+    this.detachExternalChangeHandlerMethods.forEach(detach => detach())
   }
-
-  onExternalChange = value => {
-    this.setState({ value });
-  };
 
   handleClickSuggest = () => {};
 
