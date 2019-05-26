@@ -4,5 +4,15 @@
   "srcdoc": "./build/index.html",
   "fieldTypes": [
     "Symbol"
-  ]
+  ],
+  "parameters": {
+    "installation": [
+      {
+        "id": "dandelionApiToken",
+        "name": "Dandelion API Token",
+        "type": "Symbol",
+        "required": true
+      }
+    ]
+  }
 }
