@@ -8,3 +8,7 @@ div {
   font: inherit;
   vertical-align: baseline;
 }
+
+.SuggestCategory__TextInput {
+  margin-bottom: var(--spacing-s);
+}

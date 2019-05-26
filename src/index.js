@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { TextInput, Button } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
+import '@contentful/forma-36-tokens/dist/css/index.css';
 import './index.css';
 
 class App extends React.Component {
@@ -50,6 +51,7 @@ class App extends React.Component {
           type="text"
           value={this.state.value}
           disabled={true}
+          className="SuggestCategory__TextInput"
         />
         <Button loading={this.state.loading} onClick={this.handleClickSuggest}>
           Suggest
